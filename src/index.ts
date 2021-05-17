@@ -9,7 +9,7 @@ const {
 const fs = require('fs');
 const yaml = require('js-yaml');
 
-const defaultConfigFilePath = '~/.s/.default/.fc.default'
+const defaultConfigFileObject = process.env.HOME + '/.s/.fc.default.yaml'
 
 export default class ComponentDemo extends BaseComponent {
     constructor(props) {
@@ -17,17 +17,20 @@ export default class ComponentDemo extends BaseComponent {
     }
 
     private async getConfigFromFile() {
+        let yamlData
         try {
-            return yaml.safeLoad(fs.readFileSync(defaultConfigFilePath, 'utf8'))
+            yamlData = await yaml.load(fs.readFileSync(defaultConfigFileObject, 'utf8'))
         } catch (e) {
-            return {"web-framework": "nas", "deploy-type": "sdk"}
+            console.log(e)
+            yamlData = {"web-framework": "nas", "deploy-type": "sdk"}
         }
+        return yamlData
     }
 
     private async writeToFile(key: string, value: string) {
-        const config = this.getConfigFromFile()
+        const config = await this.getConfigFromFile()
         config[key] = value
-        fs.writeFileSync(defaultConfigFilePath, yaml.safeDump(config), 'utf8');
+        await fs.writeFileSync(defaultConfigFileObject, yaml.dump(config));
         return true
     }
 
@@ -45,9 +48,7 @@ export default class ComponentDemo extends BaseComponent {
             boolean: ['help'],
             alias: {help: 'h'},
         };
-        console.log(inputs)
         const comParse = commandParse({args: inputs.args}, apts);
-        console.log(comParse)
         if (comParse.data && comParse.data.help) {
             help([{
                 header: 'Usage',
@@ -55,18 +56,18 @@ export default class ComponentDemo extends BaseComponent {
             },
                 {
                     header: 'Examples',
-                    optionList: [
+                    content: [
                         {
                             desc: 'web-framework',
-                            example: 'When deploying web framework to aliyun FC, you can select "nas" (the code is placed in NAS, and the amount of modification is minimal, but the version and alias of function calculation are not available) and "container" (some code modifications may be involved)'
+                            example: '["nas", "container"], When deploying web framework to aliyun FC, you can select "nas" (the code is placed in NAS, and the amount of modification is minimal, but the version and alias of function calculation are not available) and "container" (some code modifications may be involved)'
                         },
                         {
                             desc: 'deploy-type',
-                            example: 'When deploying code to aliyun FC, you can choose "sdk" (deployment through SDK, faster speed) and "pulumi" (relatively slow speed)'
+                            example: '["sdk", "pulumi"], When deploying code to aliyun FC, you can choose "sdk" (deployment through SDK, faster speed) and "pulumi" (relatively slow speed)'
                         }
                     ],
                 },]);
-            return;
+            return ;
         }
         if (comParse.data._.length > 0) {
             if (comParse.data._[0] == "web-framework") {
@@ -78,15 +79,14 @@ export default class ComponentDemo extends BaseComponent {
             }
             if (comParse.data._[0] == "deploy-type") {
                 if (['sdk', 'pulumi'].includes(comParse.data._[1])) {
-                    this.writeToFile("deploy-type", comParse.data._[1])
+                    await this.writeToFile("deploy-type", comParse.data._[1])
                 } else {
                     throw new Error(`The value range is ['sdk', 'pulumi']`);
                 }
             }
 
         }
-        console.log("--s-ad-sa-das")
-        return this.getConfigFromFile();
+        return await this.getConfigFromFile();
     }
 
     /**
