@@ -21,7 +21,6 @@ export default class ComponentDemo extends BaseComponent {
         try {
             yamlData = await yaml.load(fs.readFileSync(defaultConfigFileObject, 'utf8'))
         } catch (e) {
-            console.log(e)
             yamlData = {"web-framework": "nas", "deploy-type": "sdk"}
         }
         return yamlData
