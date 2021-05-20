@@ -104,7 +104,7 @@ export default class ComponentDemo extends BaseComponent {
             boolean: ['help'],
             alias: {help: 'h'},
         };
-        const comParse = commandParse({args: inputs.args}, apts);
+        const comParse = commandParse({args: inputs.args || ""}, apts);
         if (comParse.data && comParse.data._.length > 0) {
             if (comParse.data._[0] == "web-framework") {
                 const webFramework = (await this.getConfigFromFile())["web-framework"]
