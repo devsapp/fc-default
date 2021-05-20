@@ -107,22 +107,22 @@ export default class ComponentDemo extends BaseComponent {
         const comParse = commandParse({args: inputs.args}, apts);
         if (comParse.data && comParse.data._.length > 0) {
             if (comParse.data._[0] == "web-framework") {
-                const webFramework = this.getConfigFromFile()["web-framework"]
+                const webFramework = (await this.getConfigFromFile())["web-framework"]
                 if (!process.env['s-default-web-framework']) {
-                    console.log(`📎 If you want to deploy with ${webFramework === "nas" ? "container" : "nas"}, you can [s cli fc-default set web-framework ${webFramework === "nas" ? "nas" : "container"}] to switch.`)
+                    console.log(`📎 Using web framework type: ${webFramework}, If you want to deploy with ${webFramework === "nas" ? "container" : "nas"}, you can [s cli fc-default set web-framework ${webFramework === "nas" ? "container" : "nas"}] to switch.`)
                 }
                 return webFramework
             }
             if (comParse.data._[0] == "deploy-type") {
-                const deployType = this.getConfigFromFile()["deploy-type"]
+                const deployType = (await this.getConfigFromFile())["deploy-type"]
                 if (!process.env['s-default-deploy-type']) {
-                    console.log(`📎 If you want to deploy with ${deployType === "sdk" ? "pulumi" : "sdk"}, you can [s cli fc-default set web-framework ${deployType === "sdk" ? "sdk" : "pulumi"}] to switch.`)
+                    console.log(`📎 Using fc deploy type: ${deployType}, If you want to deploy with ${deployType === "sdk" ? "pulumi" : "sdk"}, you can [s cli fc-default set deploy-type ${deployType === "sdk" ? "pulumi" : "sdk"}] to switch.`)
                 }
                 return deployType
             }
 
         }
-        return this.getConfigFromFile()
+        return await this.getConfigFromFile()
     }
 
 
