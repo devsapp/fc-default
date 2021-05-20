@@ -23,6 +23,8 @@ export default class ComponentDemo extends BaseComponent {
         } catch (e) {
             yamlData = {"web-framework": "nas", "deploy-type": "sdk"}
         }
+        yamlData["web-framework"] = process.env['s-default-web-framework'] || yamlData["web-framework"]
+        yamlData["deploy-type"] = process.env['s-default-deploy-type'] || yamlData["deploy-type"]
         return yamlData
     }
 
@@ -66,7 +68,7 @@ export default class ComponentDemo extends BaseComponent {
                         }
                     ],
                 },]);
-            return ;
+            return;
         }
         if (comParse.data && comParse.data._.length > 0) {
             if (comParse.data._[0] == "web-framework") {
@@ -98,6 +100,28 @@ export default class ComponentDemo extends BaseComponent {
             command: 'get',
             uid: '',
         });
+        const apts = {
+            boolean: ['help'],
+            alias: {help: 'h'},
+        };
+        const comParse = commandParse({args: inputs.args}, apts);
+        if (comParse.data && comParse.data._.length > 0) {
+            if (comParse.data._[0] == "web-framework") {
+                const webFramework = this.getConfigFromFile()["web-framework"]
+                if (!process.env['s-default-web-framework']) {
+                    console.log(`📎 If you want to deploy with ${webFramework === "nas" ? "container" : "nas"}, you can [s cli fc-default set web-framework ${webFramework === "nas" ? "nas" : "container"}] to switch.`)
+                }
+                return webFramework
+            }
+            if (comParse.data._[0] == "deploy-type") {
+                const deployType = this.getConfigFromFile()["deploy-type"]
+                if (!process.env['s-default-deploy-type']) {
+                    console.log(`📎 If you want to deploy with ${deployType === "sdk" ? "pulumi" : "sdk"}, you can [s cli fc-default set web-framework ${deployType === "sdk" ? "sdk" : "pulumi"}] to switch.`)
+                }
+                return deployType
+            }
+
+        }
         return this.getConfigFromFile()
     }
 
