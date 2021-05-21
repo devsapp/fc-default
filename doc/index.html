@@ -84,6 +84,31 @@
 				<pre><code class="language-yaml"><span style="color: #800000">web-framework</span><span style="color: #000000">: </span><span style="color: #0000FF">nas</span>
 <span style="color: #800000">deploy-type</span><span style="color: #000000">: </span><span style="color: #0000FF">sdk</span>
 </code></pre>
+				<a href="#上层组件调用" id="上层组件调用" style="color: inherit; text-decoration: none;">
+					<h2>上层组件调用</h2>
+				</a>
+				<ol>
+					<li><p>获取所有配置</p>
+						<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">fcDefault</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">core</span><span style="color: #000000">.</span><span style="color: #795E26">loadComponent</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;devsapp/fc-default&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">res</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">fcDefault</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">();</span>
+</code></pre>
+					</li>
+					<li><p>获取指定配置</p>
+						<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">fcDefault</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">core</span><span style="color: #000000">.</span><span style="color: #795E26">loadComponent</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;devsapp/fc-default&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">res</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">fcDefault</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">({</span><span style="color: #001080">args:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;deploy-type&quot;</span><span style="color: #000000">});</span>
+</code></pre>
+						<p>此时会有提醒，例如：</p>
+						<pre><code><span style="color: #000000">📎 </span><span style="color: #001080">Using</span><span style="color: #000000"> </span><span style="color: #001080">fc</span><span style="color: #000000"> </span><span style="color: #001080">deploy</span><span style="color: #000000"> type: </span><span style="color: #001080">pulumi</span><span style="color: #000000">, </span><span style="color: #001080">If</span><span style="color: #000000"> </span><span style="color: #001080">you</span><span style="color: #000000"> </span><span style="color: #001080">want</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">deploy</span><span style="color: #000000"> </span><span style="color: #AF00DB">with</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000">, </span><span style="color: #001080">you</span><span style="color: #000000"> </span><span style="color: #001080">can</span><span style="color: #000000"> [</span><span style="color: #001080">s</span><span style="color: #000000"> </span><span style="color: #001080">cli</span><span style="color: #000000"> </span><span style="color: #001080">fc</span><span style="color: #000000">-</span><span style="color: #001080">default</span><span style="color: #000000"> </span><span style="color: #001080">set</span><span style="color: #000000"> </span><span style="color: #001080">deploy</span><span style="color: #000000">-</span><span style="color: #001080">type</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000">] </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">switch</span><span style="color: #000000">.</span>
+</code></pre>
+					</li>
+					<li><p>强制获取配置</p>
+						<pre><code><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;s-default-deploy-type&#039;</span><span style="color: #000000">] = </span><span style="color: #A31515">&#039;pulumi&#039;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">fcDefault</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">core</span><span style="color: #000000">.</span><span style="color: #795E26">loadComponent</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;devsapp/fc-default&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">res</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">fcDefault</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">({</span><span style="color: #001080">args:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;deploy-type&quot;</span><span style="color: #000000">});</span>
+</code></pre>
+						<p>此时获取的配置被指定为<code>pulumi</code>，同时不会有任何提醒</p>
+					</li>
+				</ol>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

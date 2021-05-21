@@ -39,7 +39,7 @@ const fcDefault = await core.loadComponent('devsapp/fc-default');
 const res = await fcDefault.get();
 ```
 
-2. 获取制定配置
+2. 获取指定配置
 ```
 const fcDefault = await core.loadComponent('devsapp/fc-default');
 const res = await fcDefault.get({args: "deploy-type"});
