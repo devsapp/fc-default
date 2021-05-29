@@ -73,7 +73,7 @@ export default class ComponentDemo extends BaseComponent {
         if (comParse.data && comParse.data._.length > 0) {
             if (comParse.data._[0] == "web-framework") {
                 if (['nas', 'container'].includes(comParse.data._[1])) {
-                    this.writeToFile("web-framework", comParse.data._[1])
+                    await this.writeToFile("web-framework", comParse.data._[1])
                 } else {
                     throw new Error(`The value range is ['nas', 'container']`);
                 }
