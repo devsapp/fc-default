@@ -41,7 +41,7 @@ export default class ComponentDemo extends BaseComponent {
      * @returns
      */
     public async set(inputs: InputProps) {
-        reportComponent('express', {
+        reportComponent('fc-default', {
             command: 'set',
             uid: '',
         });
@@ -96,7 +96,7 @@ export default class ComponentDemo extends BaseComponent {
      * @returns
      */
     public async get(inputs: InputProps) {
-        reportComponent('express', {
+        reportComponent('fc-default', {
             command: 'get',
             uid: '',
         });
