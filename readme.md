@@ -7,16 +7,17 @@
 命令： `s cli fc-default set`
 
 子命令：
-    - web-framework
-        - nas
-        - container
-    - deploy-type
-        - sdk
-        - pulumi
+- web-framework
+    - nas
+    - container
+- deploy-type
+    - sdk
+    - pulumi
 
 例如：
-    - 部署web-framework时，将代码放在nas的默认设置：`s cli fc-default set web-framework nas`
-    - 部署函数时，默认采用sdk方案：`s cli fc-default set deploy-type sdk`
+- 部署web-framework时，将代码放在nas（默认设置）：`s cli fc-default set web-framework nas`
+- 部署web-framework时，也可选择将代码放在镜像文件内：`s cli fc-default set web-framework container`
+- 部署函数时，默认采用sdk方案：`s cli fc-default set deploy-type sdk`
 
 
 
