@@ -66,16 +66,31 @@
 					<h2>设置</h2>
 				</a>
 				<p>命令： <code>s cli fc-default set</code></p>
-				<p>子命令：
-					- web-framework
-					- nas
-					- container
-					- deploy-type
-					- sdk
-				- pulumi</p>
-				<p>例如：
-					- 部署web-framework时，将代码放在nas的默认设置：<code>s cli fc-default set web-framework nas</code>
-				- 部署函数时，默认采用sdk方案：<code>s cli fc-default set deploy-type sdk</code></p>
+				<p>子命令：</p>
+				<ul>
+					<li>web-framework<ul>
+							<li>nas</li>
+							<li>container</li>
+						</ul>
+					</li>
+					<li>deploy-type<ul>
+							<li>sdk</li>
+							<li>pulumi</li>
+						</ul>
+					</li>
+					<li>fc-endpoint</li>
+					<li>enable-fc-endpoint</li>
+				</ul>
+				<p>例如：</p>
+				<ul>
+					<li>部署web-framework时，将代码放在nas（默认设置）：<code>s cli fc-default set web-framework nas</code></li>
+					<li>部署web-framework时，也可选择将代码放在镜像文件内：<code>s cli fc-default set web-framework container</code></li>
+					<li>部署函数时，默认采用sdk方案：<code>s cli fc-default set deploy-type sdk</code></li>
+					<li>部署函数时，若要使用自定义的 endpoint: <pre><code class="language-bash"><span style="color: #000000">$ s cli fc-default </span><span style="color: #795E26">set</span><span style="color: #000000"> fc-endpoint xxx</span>
+<span style="color: #000000">$ s cli fc-default </span><span style="color: #795E26">set</span><span style="color: #000000"> enable-fc-endpoint </span><span style="color: #795E26">true</span>
+</code></pre>
+					</li>
+				</ul>
 				<a href="#获取" id="获取" style="color: inherit; text-decoration: none;">
 					<h2>获取</h2>
 				</a>
@@ -83,6 +98,8 @@
 				<p>默认：</p>
 				<pre><code class="language-yaml"><span style="color: #800000">web-framework</span><span style="color: #000000">: </span><span style="color: #0000FF">nas</span>
 <span style="color: #800000">deploy-type</span><span style="color: #000000">: </span><span style="color: #0000FF">sdk</span>
+<span style="color: #800000">fc-endpoint</span><span style="color: #000000">: </span><span style="color: #0000FF">xxx</span>
+<span style="color: #800000">enable-fc-endpoint</span><span style="color: #000000">: </span><span style="color: #0000FF">&#039;true&#039;</span>
 </code></pre>
 				<a href="#上层组件调用" id="上层组件调用" style="color: inherit; text-decoration: none;">
 					<h2>上层组件调用</h2>
