@@ -1,2 +1,5 @@
 node_modules
 .s
+.idea
+.vscode
+package-lock.json

@@ -25,6 +25,8 @@ export default class ComponentDemo extends BaseComponent {
         }
         yamlData["web-framework"] = process.env['s-default-web-framework'] || yamlData["web-framework"]
         yamlData["deploy-type"] = process.env['s-default-deploy-type'] || yamlData["deploy-type"]
+        yamlData['fc-endpoint'] = process.env['s-default-fc-endpoint'] || yamlData['fc-endpoint']
+        yamlData['enable-fc-endpoint'] = process.env['s-default-enable-fc-endpoint'] || yamlData['enable-fc-endpoint']
         return yamlData
     }
 
@@ -65,6 +67,14 @@ export default class ComponentDemo extends BaseComponent {
                         {
                             desc: 'deploy-type',
                             example: '["sdk", "pulumi"], When deploying code to aliyun FC, you can choose "sdk" (deployment through SDK, faster speed) and "pulumi" (relatively slow speed)'
+                        },
+                        {
+                            desc: 'fc-endpoint',
+                            example: `'s cli fc-default set fc-endpoint xxx': Deploy rsource to fc with the custom endpoint.`
+                        },
+                        {
+                            desc: 'enable-fc-endpoint',
+                            example: `'s cli fc-default set enable-fc-endpoint true': Enable the defined fc-endpoint by user.`
                         }
                     ],
                 },]);
@@ -85,7 +95,12 @@ export default class ComponentDemo extends BaseComponent {
                     throw new Error(`The value range is ['sdk', 'pulumi']`);
                 }
             }
-
+            if (comParse.data._[0] === 'fc-endpoint') {
+                await this.writeToFile('fc-endpoint', comParse.data._[1]);
+            }
+            if (comParse.data._[0] === 'enable-fc-endpoint') {
+                await this.writeToFile('enable-fc-endpoint', comParse.data._[1]);
+            }
         }
         return await this.getConfigFromFile();
     }
@@ -121,8 +136,16 @@ export default class ComponentDemo extends BaseComponent {
                 }
                 return deployType
             }
+            if (comParse.data._[0] === 'fc-endpoint') {
+                return (await this.getConfigFromFile())["fc-endpoint"];
+            }
+            if (comParse.data._[0] === 'enable-fc-endpoint') {
+                return (await this.getConfigFromFile())["enable-fc-endpoint"];
+            }
 
         }
+
+
         return await this.getConfigFromFile()
     }
 
