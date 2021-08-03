@@ -23,10 +23,10 @@ export default class ComponentDemo extends BaseComponent {
         } catch (e) {
             yamlData = {"web-framework": "nas", "deploy-type": "sdk"}
         }
-        yamlData["web-framework"] = process.env['s-default-web-framework'] || yamlData["web-framework"]
-        yamlData["deploy-type"] = process.env['s-default-deploy-type'] || yamlData["deploy-type"]
-        yamlData['fc-endpoint'] = process.env['s-default-fc-endpoint'] || yamlData['fc-endpoint']
-        yamlData['enable-fc-endpoint'] = process.env['s-default-enable-fc-endpoint'] || yamlData['enable-fc-endpoint']
+        yamlData["web-framework"] = process.env['s-default-web-framework'] || process.env['s_default_web_framework'] || yamlData["web-framework"]
+        yamlData["deploy-type"] = process.env['s-default-deploy-type'] || process.env['s_default_deploy_type'] || yamlData["deploy-type"]
+        yamlData['fc-endpoint'] = process.env['s-default-fc-endpoint'] || process.env['s_default_fc_endpoint'] || yamlData['fc-endpoint']
+        yamlData['enable-fc-endpoint'] = process.env['s-default-enable-fc-endpoint'] || process.env['s_default_enable_fc_endpoint'] || yamlData['enable-fc-endpoint']
         return yamlData
     }
 
