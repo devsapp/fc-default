@@ -1,5 +1,6 @@
 import {InputProps} from './common/entity';
 import * as path from 'path';
+import os from 'os';
 
 const {
     help,
@@ -9,7 +10,7 @@ const {
 const fs = require('fs');
 const yaml = require('js-yaml');
 
-const defaultConfigFileObject = path.join(process.env.HOME, '.s', '.fc.default.yaml');
+const defaultConfigFileObject = path.join(os.homedir(), '.s', '.fc.default.yaml');
 export default class ComponentDemo {
     private async getConfigFromFile() {
         let yamlData
