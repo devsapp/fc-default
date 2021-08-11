@@ -2,20 +2,12 @@ export interface ICredentials {
     AccountID?: string,
     AccessKeyID?: string,
     AccessKeySecret?: string,
-    SecretID?: string,
-    SecretKey?: string,
-    SecretAccessKey?: string,
-    KeyVaultName?: string,
-    TenantID?: string,
-    ClientID?: string,
-    ClientSecret?: string,
-    PrivateKeyData?: string
-  
-  }
+    SecurityToken?: string,
+}
   export interface InputProps {
     props: any, // 用户自定义输入
     credentials: ICredentials, // 用户秘钥
-    appName: string, // 
+    appName: string, //
     project: {
       component: string, // 组件名（支持本地绝对路径）
       access: string, // 访问秘钥名
