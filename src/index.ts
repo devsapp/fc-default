@@ -1,4 +1,3 @@
-import BaseComponent from './common/base';
 import {InputProps} from './common/entity';
 import * as path from 'path';
 
@@ -11,11 +10,7 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 
 const defaultConfigFileObject = path.join(process.env.HOME, '.s', '.fc.default.yaml');
-export default class ComponentDemo extends BaseComponent {
-    constructor(props) {
-        super(props)
-    }
-
+export default class ComponentDemo {
     private async getConfigFromFile() {
         let yamlData
         try {

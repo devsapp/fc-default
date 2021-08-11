@@ -17,6 +17,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "autoInstall": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/ServerlessTool/express-alibaba"
@@ -25,16 +26,14 @@
     "start": "npm run watch",
     "watch": "npm run doc && tsc -w",
     "publish": "npm run build && s cli platform publish",
-    "build": "rm -rf node_modules && rm -rf package-lock.json && npm i && tsc",
-    "postbuild": "npm run doc",
+    "prebuild": "rm -rf node_modules && rm -rf package-lock.json && npm i && rm -rf lib",
+    "build": "ncc build src/index.ts -m -o lib",
+    "postbuild": "rm -rf package-lock.json && rm -rf node_modules",
     "doc": "npx typedoc src/index.ts --json doc/doc.json --out doc"
   },
   "dependencies": {
     "@serverless-devs/core": "^0.0.*",
-    "i18n": "^0.13.2",
-    "js-yaml": "^4.0.0",
-    "lodash.get": "^4.4.2",
-    "tty-table": "^4.1.3"
+    "js-yaml": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.23",
@@ -43,6 +42,7 @@
     "eslint": "^7.7.0",
     "ts-node": "^8.10.2",
     "typedoc": "^0.20.35",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "@vercel/ncc": "^0.24.0"
   }
 }
