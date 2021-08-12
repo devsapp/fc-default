@@ -27,7 +27,7 @@
     "watch": "npm run doc && tsc -w",
     "publish": "npm run build && s cli platform publish",
     "prebuild": "rm -rf node_modules && rm -rf package-lock.json && npm i && rm -rf lib",
-    "build": "ncc build src/index.ts -m -o lib",
+    "build": "ncc build src/index.ts -m -e @serverless-devs/core -o lib",
     "postbuild": "rm -rf package-lock.json && rm -rf node_modules",
     "doc": "npx typedoc src/index.ts --json doc/doc.json --out doc"
   },
