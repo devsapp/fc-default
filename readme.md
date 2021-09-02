@@ -15,6 +15,7 @@
     - pulumi
 - fc-endpoint
 - enable-fc-endpoint
+- fc-cluster-ip
 
 例如：
 - 部署web-framework时，将代码放在nas（默认设置）：`s cli fc-default set web-framework nas`
@@ -25,6 +26,7 @@
 $ s cli fc-default set fc-endpoint xxx
 $ s cli fc-default set enable-fc-endpoint true
 ```
+- 部署函数时，若要使用测试集群 ip: `s cli fc-default set fc-cluster-ip xxx`
 
 
 
