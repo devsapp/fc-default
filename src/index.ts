@@ -122,6 +122,38 @@ export default class ComponentDemo {
     };
     const args = inputs && inputs.args ? inputs.args : '';
     const comParse = commandParse({ args: args || '' }, apts);
+    if (comParse?.data?.help) {
+      help([{
+        header: 'Usage',
+        content: 's cli fc-default get [type]',
+      },
+      {
+        header: 'Examples',
+        content: [
+          {
+            desc: 'web-framework',
+            example: "How to deploy web framework to Alibaba Cloud FC ['nas','container']",
+          },
+          {
+            desc: 'deploy-type',
+            example: "How to deploy code to Alibaba Cloud FC ['nas','container']",
+          },
+          {
+            desc: 'fc-endpoint',
+            example: 'Deploy rsource to fc with the custom endpoint.',
+          },
+          {
+            desc: 'enable-fc-endpoint',
+            example: 'Enable the defined fc-endpoint by user.',
+          },
+          {
+            desc: 'fc-cluster-ip',
+            example: 'Deploy resource to fc with the specific cluster ip.',
+          },
+        ],
+      }]);
+      return;
+    }
     if (comParse.data && comParse.data._.length > 0) {
       if (comParse.data._[0] == 'web-framework') {
         const webFramework = (await this.getConfigFromFile())['web-framework'];
