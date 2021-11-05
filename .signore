@@ -19,7 +19,8 @@ package-lok.json
 .git
 
 README.md
-./examples
+./example
+./src
 ./test
 ./Makefile
 ./f2elint.config.js
