@@ -45,10 +45,6 @@ export default class ComponentDemo {
         header: 'Examples',
         content: [
           {
-            desc: 'web-framework',
-            example: '["nas", "container"], When deploying web framework to aliyun FC, you can select "nas" (the code is placed in NAS, and the amount of modification is minimal, but the version and alias of function calculation are not available) and "container" (some code modifications may be involved)',
-          },
-          {
             desc: 'deploy-type',
             example: '["sdk", "pulumi"], When deploying code to aliyun FC, you can choose "sdk" (deployment through SDK, faster speed) and "pulumi" (relatively slow speed)',
           },
@@ -69,13 +65,6 @@ export default class ComponentDemo {
       return;
     }
     if (comParse.data && comParse.data._.length > 0) {
-      if (comParse.data._[0] == 'web-framework') {
-        if (['nas', 'container'].includes(comParse.data._[1])) {
-          await this.writeToFile('web-framework', comParse.data._[1]);
-        } else {
-          throw new Error('The value range is [\'nas\', \'container\']');
-        }
-      }
       if (comParse.data._[0] == 'deploy-type') {
         if (['sdk', 'pulumi'].includes(comParse.data._[1])) {
           await this.writeToFile('deploy-type', comParse.data._[1]);
@@ -131,10 +120,6 @@ export default class ComponentDemo {
         header: 'Examples',
         content: [
           {
-            desc: 'web-framework',
-            example: "How to deploy web framework to Alibaba Cloud FC ['nas','container']",
-          },
-          {
             desc: 'deploy-type',
             example: "How to deploy code to Alibaba Cloud FC ['nas','container']",
           },
@@ -155,18 +140,8 @@ export default class ComponentDemo {
       return;
     }
     if (comParse.data && comParse.data._.length > 0) {
-      if (comParse.data._[0] == 'web-framework') {
-        const webFramework = (await this.getConfigFromFile())['web-framework'];
-        if (!process.env['s-default-web-framework']) {
-          console.log(`📎 Using web framework type: ${webFramework}, If you want to deploy with ${webFramework === 'nas' ? 'container' : 'nas'}, you can [s cli fc-default set web-framework ${webFramework === 'nas' ? 'container' : 'nas'}] to switch.`);
-        }
-        return webFramework;
-      }
       if (comParse.data._[0] == 'deploy-type') {
         const deployType = (await this.getConfigFromFile())['deploy-type'];
-        if (!process.env['s-default-deploy-type']) {
-          console.log(`📎 Using fc deploy type: ${deployType}, If you want to deploy with ${deployType === 'sdk' ? 'pulumi' : 'sdk'}, you can [s cli fc-default set deploy-type ${deployType === 'sdk' ? 'pulumi' : 'sdk'}] to switch.`);
-        }
         return deployType;
       }
       if (comParse.data._[0] === 'fc-endpoint') {
@@ -189,9 +164,8 @@ export default class ComponentDemo {
     try {
       yamlData = await yaml.load(fs.readFileSync(defaultConfigFileObject, 'utf8'));
     } catch (e) {
-      yamlData = { 'web-framework': 'nas', 'deploy-type': 'sdk' };
+      yamlData = { 'deploy-type': 'sdk' };
     }
-    yamlData['web-framework'] = process.env['s-default-web-framework'] || process.env.s_default_web_framework || yamlData['web-framework'];
     yamlData['deploy-type'] = process.env['s-default-deploy-type'] || process.env.s_default_deploy_type || yamlData['deploy-type'];
     yamlData['fc-endpoint'] = process.env['s-default-fc-endpoint'] || process.env.s_default_fc_endpoint || yamlData['fc-endpoint'];
     yamlData['enable-fc-endpoint'] = process.env['s-default-enable-fc-endpoint'] || process.env.s_default_enable_fc_endpoint || yamlData['enable-fc-endpoint'];
