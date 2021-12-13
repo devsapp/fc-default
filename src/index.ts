@@ -154,9 +154,11 @@ export default class ComponentDemo {
         return (await this.getConfigFromFile())['fc-cluster-ip'];
       }
     }
-
-
-    return await this.getConfigFromFile();
+    const result = await this.getConfigFromFile();
+    if(result['web-framework']){
+      delete result['web-framework'];
+    }
+    return result;
   }
 
   private async getConfigFromFile() {
