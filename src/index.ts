@@ -121,7 +121,7 @@ export default class ComponentDemo {
         content: [
           {
             desc: 'deploy-type',
-            example: "How to deploy code to Alibaba Cloud FC ['nas','container']",
+            example: "How to deploy code to Alibaba Cloud FC ['sdk','pulumi']",
           },
           {
             desc: 'fc-endpoint',
@@ -158,6 +158,7 @@ export default class ComponentDemo {
     if(result['web-framework']){
       delete result['web-framework'];
     }
+
     return result;
   }
 
