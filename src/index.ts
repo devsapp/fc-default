@@ -1,6 +1,5 @@
 import { InputProps } from './common/entity';
 import * as path from 'path';
-import os from 'os';
 import logger from './common/logger';
 import * as hostile from 'hostile';
 import util from 'util';
@@ -9,6 +8,7 @@ const {
   help,
   commandParse,
   reportComponent,
+  FcCommon
 } = require('@serverless-devs/core');
 const fs = require('fs');
 const yaml = require('js-yaml');
@@ -17,7 +17,7 @@ const getFromHosts = util.promisify(hostile.get);
 const removeFromHosts = util.promisify(hostile.remove);
 const setInHosts = util.promisify(hostile.set);
 
-const defaultConfigFileObject = path.join(os.homedir(), '.s', '.fc.default.yaml');
+const defaultConfigFileObject = FcCommon.defaultConfigFile;
 const DEFAULT_FC_DEV_ENDPOINT = 'fc.dev-cluster.aliyuncs.com';
 
 export default class ComponentDemo {
