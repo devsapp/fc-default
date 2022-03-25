@@ -2,12 +2,12 @@ Type: Component
 Name: fc-default
 Provider:
   - 阿里云
-Version: 0.0.22
-Description: 阿里云切换fc默认模式组件
+Version: 0.0.23
+Description: Alibaba Cloud switches FC default mode components
 HomePage: https://github.com/devsapp/fc-default
 Commands:
-  set: 设置默认配置
-  get: 获取默认配置
+  set: Set default configuration
+  get: Get default configuration
 Tags: #标签详情
   - 函数计算
 Category: 其它

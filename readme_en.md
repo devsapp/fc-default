@@ -1,53 +1,53 @@
-# 组件说明
+# Component description
 
-<center> 中文文档 | <a href="./readme_en.md">English</a> </center>
+<center> <a href="./readme.md">中文文档</a> | English </center>
 
-## 设置
+## Set up
 
-命令： `s cli fc-default set`
+Command: `s cli fc-default set`
 
-子命令：
+Subcommand:
 - fc-endpoint
-- enable-fc-endpoint
+-enable-fc-endpoint
 - fc-cluster-ip
 - api-default-region
 - api-default-version
 
-例如：
-- 部署函数时，若要使用自定义的 endpoint: 
+E.g:
+- To use a custom endpoint when deploying a function:
 ```bash
 $ s cli fc-default set fc-endpoint xxx
 $ s cli fc-default set enable-fc-endpoint true
 ```
-- 部署函数时，若要使用测试集群 ip: `s cli fc-default set fc-cluster-ip xxx`
+- To use the test cluster ip when deploying the function: `s cli fc-default set fc-cluster-ip xxx`
 
 
-## 获取
+## Obtain
 
-命令： `s cli fc-default get`
+Command: `s cli fc-default get`
 
-默认：
+default:
 
-```yaml
+````yaml
 fc-endpoint: xxx
 enable-fc-endpoint: 'true'
 ```
 
-## 上层组件调用
+## Upper component call
 
-1. 获取所有配置
+1. Get all configurations
 ```
 const fcDefault = await core.loadComponent('devsapp/fc-default');
 const res = await fcDefault.get();
 ```
 
-2. 获取指定配置
+2. Get the specified configuration
 ```
 const fcDefault = await core.loadComponent('devsapp/fc-default');
 const res = await fcDefault.get({args: "fc-endpoint"});
 ```
 
-3. 强制获取配置
+3. Force access to configuration
 ```
 process.env['s-default-fc-endpoint'] = 'xxx'
 const fcDefault = await core.loadComponent('fc-default');
