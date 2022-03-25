@@ -28,7 +28,7 @@ Command: `s cli fc-default get`
 
 default:
 
-````yaml
+```yaml
 fc-endpoint: xxx
 enable-fc-endpoint: 'true'
 ```
