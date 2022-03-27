@@ -192,11 +192,15 @@ export default class Component {
       }
       // @ts-ignore
       if (comParse.data._[0] === 'api-default-region') {
-        return (await this.getConfigFromFile())['api-default-region'] || 'cn-hangzhou';
+        const defaultRegion = (await this.getConfigFromFile())['api-default-region'] || 'cn-hangzhou';
+        await this.writeToFile('api-default-region', defaultRegion);
+        return defaultRegion;
       }
       // @ts-ignore
       if (comParse.data._[0] === 'api-default-version') {
-        return (await this.getConfigFromFile())['api-default-version'] || '20160815';
+        const defaultAPIVersion = (await this.getConfigFromFile())['api-default-version'] || '20210416';
+        await this.writeToFile('api-default-version', defaultAPIVersion);
+        return defaultAPIVersion;
       }
     }
 
